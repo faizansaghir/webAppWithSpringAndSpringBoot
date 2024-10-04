@@ -18,4 +18,8 @@ public class SayHelloController {
         return "<html><head><title>My First HTML Page</title></head><body>Hello! Welcome to my HTML page</body></html>";
     }
 
+    @RequestMapping("say-hello-jsp")
+    public String sayHelloJsp(){
+        return "sayHello";
+    }
 }
