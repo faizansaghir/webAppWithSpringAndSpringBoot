@@ -33,4 +33,10 @@ Record development of Web Application using Spring and SpringBoot
     and also has additional methods implemented from the Map interface. <br><br>
 8. Spring allows us to use a Model or ModelMap as an argument directly in the method that accepts the request 
     i.e. Method with @RequestMapping or similar annotation that is responsible to handle request
-    and the framework will inject the Model or ModelMap from the request object for us
+    and the framework will inject the Model or ModelMap from the request object for us <br><br>
+9. To configure logging level of any package in Spring, in application.properties
+    <pre>logging.level.[package]=[level]
+   eg: logging.level.io.github.faizansaghir.webAppWithSpringAndSpringBoot=info
+   </pre>
+    All sub-packages will also follow same logging level if any. <br><br>
+10. Spring Boot has Logger as sub-dependency of Spring Boot Starter Web and uses slf4j as Logger
