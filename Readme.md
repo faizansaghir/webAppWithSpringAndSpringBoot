@@ -22,4 +22,16 @@ Record development of Web Application using Spring and SpringBoot
         &lt;artifactId&gt;tomcat-embed-jasper&lt;/artifactId&gt;
    &lt;/dependency&gt;
    </pre>
-    <em>Note: Remember to remove @ResponseBody annotation from above the function definition if present</em>
+    <em>Note: Remember to remove @ResponseBody annotation from above the function definition if present</em> <br><br>
+5. <strong>@RequestParam</strong>: Annotated to parameter of a mapping function to specify it is a query parameter 
+    that will be passed during request call <br><br>
+6. <strong>Model</strong>: Model is an Interface in the spring core package under com.springframework.ui 
+    is used for transferring the data or attributes from our business logic to the rendering view pages. 
+    Its primary use is to add attributes to the model and can be simply viewed and accessed similar to the Map Interface <br><br>
+7. <strong>ModelMap</strong>: ModelMap is an Interface in the spring core package under com.springframework.ui
+   It is an extension of the Model interface. It is fully compatible with the Model objects 
+    and also has additional methods implemented from the Map interface. <br><br>
+8. Spring allows us to use a Model or ModelMap as an argument directly in the method that accepts the request 
+    i.e. Method with @RequestMapping or similar annotation that is responsible to handle request
+    and the framework will inject the Model or ModelMap from the request object for us
+9. 
