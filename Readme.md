@@ -39,4 +39,21 @@ Record development of Web Application using Spring and SpringBoot
    eg: logging.level.io.github.faizansaghir.webAppWithSpringAndSpringBoot=info
    </pre>
     All sub-packages will also follow same logging level if any. <br><br>
-10. Spring Boot has Logger as sub-dependency of Spring Boot Starter Web and uses slf4j as Logger
+10. Spring Boot has Logger as sub-dependency of Spring Boot Starter Web and uses slf4j as Logger <br><br>
+11. Flow of request in Spring MVC(Model 2 Architecture with Front controller/Dispatcher Servlet): <br>
+    a. Receive HTTP Request <br>
+    b. Process HTTP Request <br>
+    &emsp;i. Identify correct controller method based on request URL <br>
+    &emsp;ii. Execute controller method and return Model and View name <br>
+    &emsp;iii. Identify correct view using ViewResolver <br>
+    &emsp;iv. Execute view <br>
+    c. Return HTTP Response <br>
+    Example:
+    <pre>For /login request
+
+    i. Correct controller method is LoginController.renderLoginPage method
+    ii. ModelMap is populated and "login" view name is returned as response
+    iii. ViewResolver resolves the view as "/WEB-INF/jsp/login.jsp" using configuration in application.properties
+    iv. Executes login.jsp view and returns HTML page as response
+    </pre> 
+    ![Reference](./src/main/resources/static/MVCFlow.png)
