@@ -24,7 +24,7 @@ Record development of Web Application using Spring and SpringBoot
    </pre>
     <em>Note: Remember to remove @ResponseBody annotation from above the function definition if present</em> <br><br>
 5. <strong>@RequestParam</strong>: Annotated to parameter of a mapping function to specify it is a query parameter 
-    that will be passed during request call <br><br>
+    It can be either as key-value payload or query parameter that will be passed during request call <br><br>
 6. <strong>Model</strong>: Model is an Interface in the spring core package under com.springframework.ui 
     is used for transferring the data or attributes from our business logic to the rendering view pages. 
     Its primary use is to add attributes to the model and can be simply viewed and accessed similar to the Map Interface <br><br>

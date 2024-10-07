@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -12,11 +13,23 @@ public class LoginController {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RequestMapping("/login")
-    public String renderLoginPage(@RequestParam String name, ModelMap model) {
-        logger.debug("Request paramater name: {}", name);
-        model.addAttribute("name", name);
+    @RequestMapping("/welcome")
+    public String renderWelcomePage(@RequestParam String username, @RequestParam Integer passwordLength, ModelMap model) {
+        logger.debug("Request parameter name: {}", username);
+        model.addAttribute("username", username);
+        model.addAttribute("passwordLength", passwordLength);
+        return "welcome";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String renderLoginPage() {
         return "login";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String handleLogin(@RequestParam String username, @RequestParam String password, ModelMap model) {
+        model.put("username", username);
+        model.put("passwordLength", password.length());
+        return "welcome";
+    }
 }
