@@ -34,4 +34,3 @@ Record development of Web Application using Spring and SpringBoot
 8. Spring allows us to use a Model or ModelMap as an argument directly in the method that accepts the request 
     i.e. Method with @RequestMapping or similar annotation that is responsible to handle request
     and the framework will inject the Model or ModelMap from the request object for us
-9. 
