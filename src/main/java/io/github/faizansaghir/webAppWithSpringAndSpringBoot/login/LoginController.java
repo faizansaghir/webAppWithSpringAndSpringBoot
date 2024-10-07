@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController {
 
+    AuthenticationService authenticationService;
+
+    public LoginController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping("/welcome")
-    public String renderWelcomePage(@RequestParam String username, @RequestParam Integer passwordLength, ModelMap model) {
+    public String renderWelcomePage(@RequestParam String username, ModelMap model) {
         logger.debug("Request parameter name: {}", username);
         model.addAttribute("username", username);
-        model.addAttribute("passwordLength", passwordLength);
         return "welcome";
     }
 
@@ -28,8 +33,13 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String handleLogin(@RequestParam String username, @RequestParam String password, ModelMap model) {
-        model.put("username", username);
-        model.put("passwordLength", password.length());
-        return "welcome";
+        if(authenticationService.authenticate(username, password)){
+            model.put("username", username);
+            return "welcome";
+        }
+        else{
+            model.put("errorMessage", "Invalid username/password");
+            return "login";
+        }
     }
 }
