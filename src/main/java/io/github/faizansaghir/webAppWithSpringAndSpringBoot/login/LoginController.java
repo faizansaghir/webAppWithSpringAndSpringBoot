@@ -22,9 +22,7 @@ public class LoginController {
     Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping("/welcome")
-    public String renderWelcomePage(@RequestParam String username, ModelMap model) {
-        logger.debug("Request parameter name: {}", username);
-        model.addAttribute("username", username);
+    public String renderWelcomePage() {
         return "welcome";
     }
 
@@ -37,7 +35,7 @@ public class LoginController {
     public String handleLogin(@RequestParam String username, @RequestParam String password, ModelMap model) {
         if(authenticationService.authenticate(username, password)){
             model.put("username", username);
-            return "welcome";
+            return "redirect:welcome";
         }
         else{
             model.put("errorMessage", "Invalid username/password");

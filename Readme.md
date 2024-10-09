@@ -73,10 +73,10 @@ Record development of Web Application using Spring and SpringBoot
             public class LoginController {...}
         We should add the annotation on controller class that set these attributes in Model. 
         This causes server to store/retain the value of the attribute in Model for future requests also
-    </pre> <br><br>
+    </pre> <br>
 13. Expression Language: When we want to access something from Model, we make use of Expression Language in .jsp file
     <pre>Example
-        &lt;h2&gt;Welcome to the TODO page ${username}&lt;/h2&gt;</pre> <br><br>
+        &lt;h2&gt;Welcome to the TODO page ${username}&lt;/h2&gt;</pre> <br>
 14. JSTL: Jakarta Standard Tag Library. It is used to manipulate dynamic data in .jsp file
     <code>jakarta.servlet.jsp.jstl.jakarta.servlet.jsp.jstl-api</code> is interface/API 
     while <code>org.glassfish.web.jakarta.servlet.jsp.jstl</code> is implementation <br>
