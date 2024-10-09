@@ -56,4 +56,25 @@ Record development of Web Application using Spring and SpringBoot
     iii. ViewResolver resolves the view as "/WEB-INF/jsp/login.jsp" using configuration in application.properties
     iv. Executes login.jsp view and returns HTML page as response
     </pre> 
-    ![Reference](./src/main/resources/static/MVCFlow.png)
+    ![Reference](./src/main/resources/static/MVCFlow.png) <br><br>
+12. Any data for a request has a scope
+    a. Request Scope: Lives for a single request, once a response is sent, the value is deleted
+    b. Session Scope: Values stored in server and is used across multiple requests
+    <pre>Scope of Request, Model and Session
+
+    Request: Any data sent in request is only valid up to when the response is sent, 
+        once a cycle of request response is over, this data is deleted from server
+    
+    Model: By default data in Model also has Request Scope. 
+        We can retain these values in Model and make it available across multiple controllers and request.
+        To retain the values of Model, use @SessionAttributes annotation on class
+        Example:
+            @SessionAttributes("username")
+            public class LoginController {...}
+        We should add the annotation on controller class that set these attributes in Model. 
+        This causes server to store/retain the value of the attribute in Model for future requests also
+    </pre> <br><br>
+13. Expression Language: When we want to access something from Model, we make use of Expression Language in .jsp file
+    <pre>Example
+        &lt;h2&gt;Welcome to the TODO page ${username}&lt;/h2&gt;</pre> <br><br>
+    
