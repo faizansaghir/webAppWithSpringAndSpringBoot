@@ -84,4 +84,33 @@ Record development of Web Application using Spring and SpringBoot
     We can get this tag based on which functionality we want to use. Spark 3.2 and above use JSTl 3.0 <br>
     a. To get the import tag, search for functionality to use <code>eg: for jakarta 3 jstl</code> and go to Tag doc <br>
 &emsp;Example URL: https://jakarta.ee/specifications/tags/3.0/tagdocs/ <br>
-    b. Copy the <code>Standard Syntax:</code> part and paste into JSP file to import that part of JSTL
+    b. Copy the <code>Standard Syntax:</code> part and paste into JSP file to import that part of JSTL <br><br>
+15. Command Bean: These are also called Form Backing objects. These provide 2-way binding for JSP and Spring.
+    These are objects that will be populated with the data from forms in JSP pages. 
+    These can also be used to pre-populate the form. To use a Command Bean
+    <pre> 1. In the binding method i.e. method mapped to the URI, add an attribute of required type
+            eg: @RequestMapping("/add-todos")
+                public String addTodo(Todo todo){...}
+    
+    2. Add form tags in JSP with modelAttribute same as parameter name of mapped method, 
+        the path of inputs should be mapped to attributes of the Command Bean
+            eg: &lt;%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %&gt;
+                &lt;form:form method="post" modelAttribute="todo"&gt;
+                    Description: &lt;form:input type="text" path="description" required="required"/&gt;
+                    &lt;input type="submit" class="btn btn-success"/&gt;
+                &lt;/form:form&gt;
+    <em>Note:   1. If there are 3 fields(say) in your Command Bean and you only map 1 attribute, 
+                then the other 2 attributes will be sent as null 
+                and if these are primitive types, you will get conversion error
+    
+            2. When a request mapping which has a form mapped to a Command Bean, 
+                during rendering will require pre-defined bean to pre-populate the form, 
+                as it binds the form before rendering the form thus we need to provide an instance with some default values
+                eg: @RequestMapping(value = "add-todo", method = RequestMethod.GET)
+                    public String addTodo(ModelMap model){
+                        Todo todo = new Todo(0, (String)model.get("username"), "", LocalDate.now().plusYears(1), false);
+                        model.addAttribute("todo", todo);
+                        return "todo";
+                    }
+                Since the todo.jsp view binds the form to todo Command Bean, we need to provide a dummy instance
+                This instance value will be shown in form inputs by default. </em></pre> <br>
