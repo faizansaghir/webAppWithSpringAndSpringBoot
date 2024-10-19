@@ -114,3 +114,16 @@ Record development of Web Application using Spring and SpringBoot
                     }
                 Since the todo.jsp view binds the form to todo Command Bean, we need to provide a dummy instance
                 This instance value will be shown in form inputs by default. </em></pre> <br>
+16. To add validation to a Command Bean, use annotations from package <code>jakarta.validation.constraints</code> <br>
+    There are to be annotated on Command Bean attributes which are to be validated if validation runs. <br>
+    Post addition of constraint annotation, add @Valid annotation to parameter that has binding.
+    <pre>eg: public class Todo {
+            // message attribute is message to be displayed if validation fails
+            @Size(min = 10, message = "Enter at least 10 characters")
+            private String description;
+        }
+        
+        @Controller
+        public class TodoController {
+            public String addTodoPost(ModelMap model, @Valid Todo todo){...}
+        } </pre> <br>

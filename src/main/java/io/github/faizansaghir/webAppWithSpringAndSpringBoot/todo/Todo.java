@@ -1,10 +1,13 @@
 package io.github.faizansaghir.webAppWithSpringAndSpringBoot.todo;
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class Todo {
     private int id;
     private String username;
+    @Size(min = 10, message = "Enter at least 10 characters")
     private String description;
     private LocalDate targetDate;
     private boolean done;
@@ -44,6 +47,7 @@ public class Todo {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     public void setDescription(String description) {
         this.description = description;

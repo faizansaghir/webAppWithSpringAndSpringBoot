@@ -1,5 +1,6 @@
 package io.github.faizansaghir.webAppWithSpringAndSpringBoot.todo;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class TodoController {
     }
 
     @RequestMapping(value = "add-todo", method = RequestMethod.POST)
-    public String addTodoPost(ModelMap model, Todo todo){
+    public String addTodoPost(ModelMap model, @Valid Todo todo){
         String username = (String)model.get("username");
         todoService.addTodo(username, todo.getDescription(), LocalDate.now().plusYears(1), false);
         return "redirect:list-todos";
