@@ -125,5 +125,17 @@ Record development of Web Application using Spring and SpringBoot
         
         @Controller
         public class TodoController {
+            @RequestMapping(value = "add-todo", method = RequestMethod.POST)
             public String addTodoPost(ModelMap model, @Valid Todo todo){...}
         } </pre> <br>
+17. To get result of Command Bean binding in a mapping method, use BindingResult class instance as parameter.
+    <pre>eg:    @Controller
+            public class TodoController {
+                @RequestMapping(value = "add-todo", method = RequestMethod.POST)
+                public String addTodoPost(ModelMap model, @Valid Todo todo, BindingResult bindingResult)
+                {
+                    if(bindingResult.hasErrors()){...}
+                    else{...}
+                }
+            }  
+    </pre> <br>
