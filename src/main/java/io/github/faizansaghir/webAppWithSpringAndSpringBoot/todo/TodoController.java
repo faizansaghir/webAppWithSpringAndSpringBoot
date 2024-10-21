@@ -55,4 +55,14 @@ public class TodoController {
         map.addAttribute("todo", todo);
         return "todo";
     }
+
+    @RequestMapping(value = "update-todo", method = RequestMethod.POST)
+    public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return "todo";
+        String username = (String)model.get("username");
+        todo.setUsername(username);
+        todoService.updateTodo(todo);
+        return "redirect:list-todos";
+    }
 }

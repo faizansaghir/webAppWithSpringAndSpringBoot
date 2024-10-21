@@ -39,4 +39,9 @@ public class TodoService {
         Optional<Todo> todo = todos.stream().filter(predicate).findFirst();
         return todo.orElse(null);
     }
+
+    public void updateTodo(Todo todo) {
+        deleteTodoById(todo.getId());
+        todos.add(todo);
+    }
 }
