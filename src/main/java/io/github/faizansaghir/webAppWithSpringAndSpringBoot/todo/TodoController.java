@@ -39,7 +39,7 @@ public class TodoController {
         if(bindingResult.hasErrors())
             return "todo";
         String username = (String)model.get("username");
-        todoService.addTodo(username, todo.getDescription(), LocalDate.now().plusYears(1), false);
+        todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
         return "redirect:list-todos";
     }
 
