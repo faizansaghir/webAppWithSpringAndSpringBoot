@@ -139,3 +139,5 @@ Record development of Web Application using Spring and SpringBoot
                 }
             }  
     </pre> <br>
+18. JSP Fragments are pieces of JSP file that are reused multiple times. <br>
+    These can be separated out into a separate file and included in view using include tag. <br>
