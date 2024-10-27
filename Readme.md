@@ -140,4 +140,8 @@ Record development of Web Application using Spring and SpringBoot
             }  
     </pre> <br>
 18. JSP Fragments are pieces of JSP file that are reused multiple times. <br>
-    These can be separated out into a separate file and included in view using include tag. <br>
+    These can be separated out into a separate file and included in view using include tag. <br><br>
+19. Spring security by default protects all APIs that we expose. <br>
+    After including spring security package in SpringBoot project, we will get a password in console during startup. <br>
+    The username for login will be 'user' by default <br><br>
+
