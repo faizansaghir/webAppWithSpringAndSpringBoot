@@ -1,6 +1,8 @@
 package io.github.faizansaghir.webAppWithSpringAndSpringBoot.todo;
 
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,14 +24,15 @@ public class TodoController {
 
     @RequestMapping("list-todos")
     public String listTodos(ModelMap model){
-        List<Todo> todos = todoService.getTodosForUsername("faizan");
+        String username = getLoggedUser();
+        List<Todo> todos = todoService.getTodosForUsername(username);
         model.addAttribute("todos", todos);
         return "listTodos";
     }
 
     @RequestMapping(value = "add-todo", method = RequestMethod.GET)
     public String addTodo(ModelMap model){
-        Todo todo = new Todo(0, (String)model.get("username"), "", LocalDate.now().plusYears(1), false);
+        Todo todo = new Todo(0, getLoggedUser(), "", LocalDate.now().plusYears(1), false);
         model.addAttribute("todo", todo);
         return "todo";
     }
@@ -38,7 +41,7 @@ public class TodoController {
     public String addTodoPost(ModelMap model, @Valid Todo todo, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return "todo";
-        String username = (String)model.get("username");
+        String username = getLoggedUser();
         todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
         return "redirect:list-todos";
     }
@@ -60,9 +63,14 @@ public class TodoController {
     public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return "todo";
-        String username = (String)model.get("username");
+        String username = getLoggedUser();
         todo.setUsername(username);
         todoService.updateTodo(todo);
         return "redirect:list-todos";
+    }
+
+    private String getLoggedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getName();
     }
 }
