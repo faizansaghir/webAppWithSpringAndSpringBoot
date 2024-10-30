@@ -144,4 +144,9 @@ Record development of Web Application using Spring and SpringBoot
 19. Spring security by default protects all APIs that we expose. <br>
     After including spring security package in SpringBoot project, we will get a password in console during startup. <br>
     The username for login will be 'user' by default <br><br>
-
+20. For development purpose, we can use in-memory H2 database. <br>
+    On startup, we will get a new H2 database URL to which we can connect at "/h2-console" <br>
+    To make the database URL static, add spring.datasource.url property in application.properties. <br>
+    <pre>Example:
+        In application.properties file
+            spring.datasource.url=jdbc:h2:mem:testdb </pre> <br>
