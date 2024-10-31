@@ -150,3 +150,33 @@ Record development of Web Application using Spring and SpringBoot
     <pre>Example:
         In application.properties file
             spring.datasource.url=jdbc:h2:mem:testdb </pre> <br>
+21. When a class is a POJO or reference for a table in database, we can mark it as an Entity. <br>
+    If Spring sees an Entity class and H2 database in a project, 
+        it automatically creates a table in the H2 database for that class with the name same as that of class
+    We can even configure the table name using @Entity(name = "tableName") if we want to map to a different table name
+    The column name is same as the attribute names of the class. 
+    We can also rename the columns in the table using @Column(name = "columnName") for the attribute we want to rename.
+    <pre>Example:
+        @Entity
+        public class Todo {
+            @Id
+            @GeneratedValue
+            private int id;
+            private String username;
+            @Size(min = 10, message = "Enter at least 10 characters")
+            private String description;
+            private LocalDate targetDate;
+            private boolean done;
+            
+            public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
+                this.id = id;
+                this.username = username;
+                this.description = description;
+                this.targetDate = targetDate;
+                this.done = done;
+            }
+        } </pre> <br>
+22. To pre-populate data in H2 database, we can use "resource/data.sql" file and write query in it. <br>
+    These queries are executed before the Entities are processed thus before the Entity tables are created. <br>
+    To configure Spring to run these queries after entity class processing, 
+        add <strong>spring.jpa.defer-datasource-initialization=true</strong> in application.properties
