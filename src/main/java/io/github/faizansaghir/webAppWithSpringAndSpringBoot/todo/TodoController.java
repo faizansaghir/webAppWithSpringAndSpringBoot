@@ -17,15 +17,17 @@ import java.util.List;
 public class TodoController {
 
     TodoService todoService;
+    TodoRepository todoRepository;
 
-    public TodoController(TodoService todoService) {
+    public TodoController(TodoService todoService, TodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
         this.todoService = todoService;
     }
 
     @RequestMapping("list-todos")
     public String listTodos(ModelMap model){
         String username = getLoggedUser();
-        List<Todo> todos = todoService.getTodosForUsername(username);
+        List<Todo> todos = todoRepository.findByUsername(username);
         model.addAttribute("todos", todos);
         return "listTodos";
     }
