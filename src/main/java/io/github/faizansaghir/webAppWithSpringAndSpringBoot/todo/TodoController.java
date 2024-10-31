@@ -16,12 +16,10 @@ import java.util.List;
 @Controller
 public class TodoController {
 
-    TodoService todoService;
     TodoRepository todoRepository;
 
-    public TodoController(TodoService todoService, TodoRepository todoRepository) {
+    public TodoController(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
-        this.todoService = todoService;
     }
 
     @RequestMapping("list-todos")
@@ -44,19 +42,20 @@ public class TodoController {
         if(bindingResult.hasErrors())
             return "todo";
         String username = getLoggedUser();
-        todoService.addTodo(username, todo.getDescription(), todo.getTargetDate(), false);
+        todo.setUsername(username);
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
 
     @RequestMapping(value = "delete-todo", method = RequestMethod.GET)
     public String deleteTodoById(@RequestParam int id){
-        todoService.deleteTodoById(id);
+        todoRepository.deleteById(id);
         return "redirect:list-todos";
     }
 
     @RequestMapping(value = "update-todo", method = RequestMethod.GET)
     public String showUpdateTodoPage(@RequestParam int id, ModelMap map){
-        Todo todo = todoService.getById(id);
+        Todo todo = todoRepository.getReferenceById(id);
         map.addAttribute("todo", todo);
         return "todo";
     }
@@ -67,7 +66,7 @@ public class TodoController {
             return "todo";
         String username = getLoggedUser();
         todo.setUsername(username);
-        todoService.updateTodo(todo);
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
 
