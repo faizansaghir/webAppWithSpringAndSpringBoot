@@ -179,4 +179,8 @@ Record development of Web Application using Spring and SpringBoot
 22. To pre-populate data in H2 database, we can use "resource/data.sql" file and write query in it. <br>
     These queries are executed before the Entities are processed thus before the Entity tables are created. <br>
     To configure Spring to run these queries after entity class processing, 
-        add <strong>spring.jpa.defer-datasource-initialization=true</strong> in application.properties
+        add <strong>spring.jpa.defer-datasource-initialization=true</strong> in application.properties <br><br>
+23. To see all the SQL queries being executed by Spring Data JPA, 
+        you can set the property in application.properties file. <br>
+    <pre>Example:
+            spring.jpa.show-sql=true</pre>
